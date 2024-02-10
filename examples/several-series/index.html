@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Simple chart example</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <link rel="stylesheet" href="../theme.css">
+</head>
+<body>
+<h1>Simple example</h1>
+<main>
+    <div class="controls">
+        <button>Generate data</button>
+        <div class="form-group">
+            <label for="horizontal-checkbox">horizontal</label>
+            <input type="checkbox" id="horizontal-checkbox">
+        </div>
+        <div class="form-group">
+            <label for="stack-checkbox">stack</label>
+            <input type="checkbox" id="stack-checkbox">
+        </div>
+    </div>
+    <ui-bar-area domain-min="0"></ui-bar-area>
+</main>
+<script src="../../src/index.js" rel="stylesheet" type="module"></script>
+<script type="module">
+    const chart = document.querySelector('ui-bar-area');
+    const stackCheckbox = document.getElementById('stack-checkbox');
+    const horizontalCheckbox = document.getElementById('horizontal-checkbox');
+    const groupCount = 10;
+
+    document.querySelector('button').addEventListener('click', generateData);
+    horizontalCheckbox.addEventListener('change', toggleDirection);
+    stackCheckbox.addEventListener('change', toggleStackMode);
+
+    function generateData() {
+        const groups = Array.from({length: groupCount}, () => {
+            const el = document.createElement('ui-bar-group');
+            el.replaceChildren(...[Math.round(Math.random() * 200),Math.round(Math.random() * 200)].map(value => {
+                const bar = document.createElement('ui-bar');
+                bar.setAttribute('value', value);
+                return bar;
+            }));
+            return el;
+        });
+
+        const labels = Array.from({length: groupCount}, (_, index) => {
+            const el = document.createElement('span');
+            el.textContent = `label - ${index + 1}`;
+            el.setAttribute('slot', 'category');
+            return el;
+        });
+
+        chart.replaceChildren(...groups, ...labels);
+    }
+
+    function toggleDirection() {
+        chart.toggleAttribute('horizontal', horizontalCheckbox.checked);
+    }
+
+    function toggleStackMode() {
+        chart.toggleAttribute('stack', stackCheckbox.checked);
+    }
+
+    generateData();
+</script>
+</body>
+</html>

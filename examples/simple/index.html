@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Bar groups chart example</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <link rel="stylesheet" href="../theme.css">
+</head>
+<body>
+<h1>Bar group example</h1>
+<main>
+    <div class="controls">
+        <button>Generate data</button>
+        <div class="form-group">
+            <label for="horizontal-checkbox">horizontal</label>
+            <input type="checkbox" id="horizontal-checkbox">
+        </div>
+    </div>
+    <ui-bar-area domain-min="0"></ui-bar-area>
+</main>
+<script src="../../src/index.js" rel="stylesheet" type="module"></script>
+<script type="module">
+    const chart = document.querySelector('ui-bar-area');
+    const checkbox = document.getElementById('horizontal-checkbox');
+    const barCount = 10;
+
+    document.querySelector('button').addEventListener('click', generateData);
+    checkbox.addEventListener('change', toggleDirection);
+
+    function generateData() {
+        const bars = Array.from({length: barCount}, () => {
+            const el = document.createElement('ui-bar');
+            el.setAttribute('value', Math.round(Math.random() * 200));
+            return el;
+        });
+
+        const labels = Array.from({length: barCount}, (_, index) => {
+            const el = document.createElement('span');
+            el.textContent = `label - ${index + 1}`;
+            el.setAttribute('slot', 'category');
+            return el;
+        });
+
+        chart.replaceChildren(...bars, ...labels);
+    }
+
+    function toggleDirection() {
+        chart.toggleAttribute('horizontal', checkbox.checked);
+    }
+
+    generateData();
+</script>
+</body>
+</html>

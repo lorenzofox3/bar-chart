@@ -1,0 +1,36 @@
+{
+  "name": "bar-chart",
+  "version": "0.1.0",
+  "description": "lightweight library to build bar charts, based on web components",
+  "type": "module",
+  "exports": {
+    "./package.json": "./package.json",
+    ".": {
+      "import": {
+        "default": "./src/index.js"
+      }
+    }
+  },
+  "scripts": {
+    "dev": "vite"
+  },
+  "prettier": {
+    "singleQuote": true
+  },
+  "keywords": [
+    "bar",
+    "chart",
+    "webcomponents",
+    "lightweight",
+    "bar-chart",
+    "dataviz",
+    "data-visualization"
+  ],
+  "author": "Laurent RENARD",
+  "license": "MIT",
+  "devDependencies": {
+    "prettier": "^3.2.5",
+    "vite": "^5.1.1",
+    "zora": "^5.2.0"
+  }
+}

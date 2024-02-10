@@ -1,0 +1,80 @@
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+}
+
+* {
+    margin: 0;
+}
+
+body {
+    line-height: 1.4;
+    margin: unset;
+    -webkit-font-smoothing: antialiased;
+}
+
+button,
+input,
+textarea,
+select {
+    font: inherit;
+}
+
+p, h1, h2, h3, h4, h5, h6 {
+    overflow-wrap: break-word;
+}
+
+img,
+picture,
+svg,
+canvas {
+    display: block;
+    max-inline-size: 100%;
+    block-size: auto;
+}
+
+body {
+    font-family: system-ui, Avenir, sans-serif;
+    min-height: 100svh;
+    display: grid;
+    grid-template-rows: auto 1fr;
+}
+
+main {
+    display: grid;
+    grid-template-rows: auto 1fr;
+    gap: 1em;
+    padding: 1em;
+}
+
+.controls {
+    display: flex;
+    justify-content: space-between;
+}
+
+ui-bar {
+    transition: block-size 0.3s;
+}
+
+ui-bar-group {
+
+    transition: padding-inline 0.3s;
+
+    &:not([stack]) {
+        padding-inline: 10px;
+        border-inline: 1px dashed lightgray;
+    }
+
+    ui-bar:nth-child(2) {
+        background-color: lightcoral;
+    }
+}
+
+ui-bar-area {
+    &::part(category-axis) {
+        font-size: 0.75em;
+        text-align: center;
+        border-block-start: 1px solid var(--_axis-color, #abaebb);
+    }
+}
