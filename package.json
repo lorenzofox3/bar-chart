@@ -13,11 +13,13 @@
   },
   "scripts": {
     "dev": "vite",
-    "size": "rollup"
+    "build": "rollup -c rollup.config.js > bar-chart.min.js",
+    "size": "rollup -c rollup.config.js | brotli | wc -c"
   },
   "prettier": {
     "singleQuote": true
   },
+  "files": ["src", "bar-chart.min.js"],
   "keywords": [
     "bar",
     "chart",
@@ -30,6 +32,7 @@
   "author": "Laurent RENARD",
   "license": "MIT",
   "devDependencies": {
+    "@rollup/plugin-terser": "^0.4.4",
     "prettier": "^3.2.5",
     "rollup": "^4.10.0",
     "vite": "^5.1.1",
