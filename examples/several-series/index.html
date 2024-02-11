@@ -39,6 +39,7 @@
             el.replaceChildren(...[Math.round(Math.random() * 200),Math.round(Math.random() * 200)].map(value => {
                 const bar = document.createElement('ui-bar');
                 bar.setAttribute('value', value);
+                bar.innerHTML = `<span>${value}</span>`;
                 return bar;
             }));
             return el;
@@ -46,7 +47,8 @@
 
         const labels = Array.from({length: groupCount}, (_, index) => {
             const el = document.createElement('span');
-            el.textContent = `label - ${index + 1}`;
+            el.classList.add('label')
+            el.innerHTML = `<span>label - ${index + 1}</span>`;
             el.setAttribute('slot', 'category');
             return el;
         });

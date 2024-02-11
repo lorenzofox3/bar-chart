@@ -11,6 +11,7 @@
 body {
     line-height: 1.4;
     margin: unset;
+    --animation-duration: 0.3s;
     -webkit-font-smoothing: antialiased;
 }
 
@@ -44,7 +45,7 @@ body {
 main {
     display: grid;
     grid-template-rows: auto 1fr;
-    gap: 1em;
+    gap: 2.5em;
     padding: 1em;
 }
 
@@ -53,14 +54,36 @@ main {
     justify-content: space-between;
 }
 
+
+ui-bar-area:not([horizontal]) {
+    .label {
+        container: label / inline-size;
+        white-space: nowrap;
+
+        > span {
+            transform-origin: 0 0;
+            transition: transform var(--animation-duration);
+        }
+    }
+}
+
+
 ui-bar {
-    transition: block-size 0.3s;
+    transition: block-size var(--animation-duration);
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: baseline;
+    container: ui-bar / size;
+
+    span {
+        padding: 0.2em 0.5em;
+        font-size: 0.9em;
+        transition: transform var(--animation-duration);
+    }
 }
 
 ui-bar-group {
-
-    transition: padding-inline 0.3s;
-
     &:not([stack]) {
         padding-inline: 10px;
         border-inline: 1px dashed lightgray;
@@ -72,9 +95,23 @@ ui-bar-group {
 }
 
 ui-bar-area {
+
+    padding: 2em;
+
     &::part(category-axis) {
         font-size: 0.75em;
         text-align: center;
-        border-block-start: 1px solid var(--_axis-color, #abaebb);
+        border-block-start: 1px solid #abaebb;
+    }
+
+    &[horizontal] {
+        ui-bar {
+
+            container: horizontal-bar / size;
+
+            span {
+                writing-mode: horizontal-tb;
+            }
+        }
     }
 }

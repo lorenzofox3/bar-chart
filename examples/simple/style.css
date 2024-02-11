@@ -1,0 +1,38 @@
+
+@container ui-bar (width < 3em) or (height < 2em) {
+    span {
+        --_bubble-size: 75%;
+        background: inherit;
+        padding: 0.2em 0.5em 0.5em 0.5em !important;
+        transform: translateY(-2.2em);
+        clip-path: polygon(0 0%, 0 var(--_bubble-size), 50% 100%, 100% var(--_bubble-size), 100% 0%);
+    }
+}
+
+@container horizontal-bar (width < 3em) or (height < 1em) {
+    span {
+        --_arrow-size: 1em;
+        background: inherit;
+        padding-inline-start: 1em !important;
+        transform: translateX(calc(100% + 0.2em));
+        clip-path: polygon(0 50%, var(--_arrow-size) 0, 100% 0, 100% 100%, var(--_arrow-size) 100%);
+    }
+}
+
+@container ui-bar (width < 1px) or (height < 1px) {
+    span {
+        display: none;
+    }
+}
+
+@container horizontal-bar (width < 1px) {
+    span {
+        display: none;
+    }
+}
+
+@container label (max-width: 5em) {
+    span {
+        transform: translateX(50%) rotateZ(45deg);
+    }
+}

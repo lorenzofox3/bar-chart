@@ -5,6 +5,7 @@
     <title>Bar groups chart example</title>
     <meta name="viewport" content="width=device-width, initial-scale=1"/>
     <link rel="stylesheet" href="../theme.css">
+    <link rel="stylesheet" href="./style.css">
 </head>
 <body>
 <h1>Bar group example</h1>
@@ -30,13 +31,16 @@
     function generateData() {
         const bars = Array.from({length: barCount}, () => {
             const el = document.createElement('ui-bar');
-            el.setAttribute('value', Math.round(Math.random() * 200));
+            let value = Math.round(Math.random() * 200);
+            el.setAttribute('value', value);
+            el.innerHTML = `<span>${value}</span>`;
             return el;
         });
 
         const labels = Array.from({length: barCount}, (_, index) => {
             const el = document.createElement('span');
-            el.textContent = `label - ${index + 1}`;
+            el.classList.add('label')
+            el.innerHTML = `<span>label - ${index + 1}</span>`;
             el.setAttribute('slot', 'category');
             return el;
         });

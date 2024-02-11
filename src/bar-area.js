@@ -31,7 +31,8 @@ const template = createTemplate(`
         }
 
         #category-axis {
-            grid-column: 1 / span var(--_bar-count);
+            grid-column: 1 / span var(--_bar-count); /* needs to be set as 1 / -1 won't work on implicit grid*/
+            inline-size: 100%; /* seems required for FF in horizontal mode ?? */ 
             grid-row: 2;
             display: grid;
             grid-template-columns: subgrid;
@@ -40,7 +41,6 @@ const template = createTemplate(`
         ::slotted(ui-bar) {
             block-size: var(--bar-size, 0%);
             inline-size: min(75%, var(--min-inline-size));
-            transition: block-size var(--animation-duration);
             background-color: var(--bar-color);
         }
 
