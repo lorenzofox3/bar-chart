@@ -27,6 +27,8 @@
 
     document.querySelector('button').addEventListener('click', generateData);
     checkbox.addEventListener('change', toggleDirection);
+    chart.addEventListener('rendered', console.log);
+
 
     function generateData() {
         const bars = Array.from({length: barCount}, () => {

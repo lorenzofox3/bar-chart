@@ -62,6 +62,7 @@ const template = createTemplate(`
 
 export class BarArea extends HTMLElement {
   #barArea;
+  #_project;
 
   static get observedAttributes() {
     return ['domain-min', 'domain-max', 'stack'];
@@ -94,8 +95,11 @@ export class BarArea extends HTMLElement {
     this.render();
   }
 
+  project(value) {
+    return this.#_project(value);
+  }
+
   render() {
-    console.log('render');
     const barsLike = this.#barArea.assignedElements();
     this.style.setProperty('--_bar-count', barsLike.length);
 
@@ -109,10 +113,12 @@ export class BarArea extends HTMLElement {
       bar.toggleAttribute('stack', this.hasAttribute('stack')),
     );
 
-    const project = compose([round, createProjection(this)]);
+    const project = (this.#_project = compose([round, createProjection(this)]));
 
     bars.forEach((bar) => {
       bar.setAttribute('size', project(bar.value));
     });
+
+    this.dispatchEvent(new CustomEvent('rendered', { bubbles: true }));
   }
 }

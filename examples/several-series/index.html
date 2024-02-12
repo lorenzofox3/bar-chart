@@ -32,14 +32,15 @@
     document.querySelector('button').addEventListener('click', generateData);
     horizontalCheckbox.addEventListener('change', toggleDirection);
     stackCheckbox.addEventListener('change', toggleStackMode);
+    chart.addEventListener('rendered', console.log);
 
     function generateData() {
         const groups = Array.from({length: groupCount}, () => {
             const el = document.createElement('ui-bar-group');
-            el.replaceChildren(...[Math.round(Math.random() * 200),Math.round(Math.random() * 200)].map(value => {
+            el.replaceChildren(...Array.from({length: 2}, () => Math.round(Math.random() * 200)).map(value => {
                 const bar = document.createElement('ui-bar');
                 bar.setAttribute('value', value);
-                bar.innerHTML = `<span>${value}</span>`;
+                // bar.innerHTML = `<span>${value}</span>`;
                 return bar;
             }));
             return el;
@@ -47,7 +48,7 @@
 
         const labels = Array.from({length: groupCount}, (_, index) => {
             const el = document.createElement('span');
-            el.classList.add('label')
+            el.classList.add('label');
             el.innerHTML = `<span>label - ${index + 1}</span>`;
             el.setAttribute('slot', 'category');
             return el;
