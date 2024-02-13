@@ -16,6 +16,7 @@ const template = createTemplate(`
             display: grid;
             grid-template-rows: 1fr auto;
             grid-template-columns: auto repeat(var(--_bar-count), 1fr);
+            min-block-size: 350px;
         }
 
         :host([horizontal]) {

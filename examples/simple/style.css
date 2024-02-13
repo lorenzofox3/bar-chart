@@ -1,49 +1,65 @@
-::part(linear-axis){
+::part(linear-axis) {
     font-size: 0.8em;
     block-size: var(--axis-size);
     align-self: flex-end;
-    display: flex;
-    flex-direction: column-reverse;
-    justify-content: space-between;
+    grid-column: 1 / -1;
+    display: none;
+}
+
+ui-bar-area {
+    --tick-width: 2em;
+    grid-template-columns: var(--tick-width) repeat(var(--_bar-count), 1fr);
 }
 
 ::part(bar-area) {
-    border-inline-start: 1px solid lightgray;
     border-block-end: 1px solid lightgray;
 }
 
-.tick-box:not(:first-child) {
+.tick-box {
     block-size: 1px;
-    background-image: linear-gradient(to right, transparent, gray);
-    background-repeat: no-repeat;
-    background-size: 75% 100%;
-    background-position: right;
-    inline-size: 3em;
-    text-align: right;
+    background-image: linear-gradient(to right, transparent, lightgray, transparent);
+    background-size: 25px 1px;
+    inline-size: 100%;
+    text-align: left;
     margin-inline-start: auto;
 
     > span {
-        width: 100%;
+        text-align: right;
         display: inline-block;
+        width: var(--tick-width);
+    }
+
+    &:first-of-type > * {
+        display: none;
     }
 }
+
+
 
 .tick-box:first-of-type {
     background: none;
 }
 
-ui-bar-area[horizontal] .tick-box > span {
-    rotate: -45deg;
-    translate: -0.5em -0.5em;
+ui-bar-area[horizontal] {
+    .tick-box {
+        background-image: linear-gradient(to bottom, transparent, lightgray, transparent);
+        background-size: 1px 25px;
+        span {
+            rotate: -45deg;
+            translate: -0.5em 0.5em;
+        }
+    }
 }
 
-.controls:has(#axis-checkbox:not(:checked)) {
+.controls:has(#axis-checkbox:checked) {
     & + ui-bar-area::part(linear-axis) {
-        display: none;
+        display: flex;
+        flex-direction: column-reverse;
+        justify-content: space-between;
     }
 
     & + ui-bar-area::part(bar-area) {
-        border-inline-start: unset;
+        border-inline-start: 1px solid lightgray;
     }
 }
 
@@ -83,4 +99,6 @@ ui-bar-area[horizontal] .tick-box > span {
     span {
         transform: translateX(30%) rotateZ(45deg);
     }
+}
+
 }
