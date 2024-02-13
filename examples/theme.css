@@ -100,14 +100,3 @@ ui-bar {
         transition: transform var(--animation-duration);
     }
 }
-
-ui-bar-group {
-    &:not([stack]) {
-        padding-inline: 10px;
-        border-inline: 1px dashed lightgray;
-    }
-
-    ui-bar:nth-child(2) {
-        background-color: lightcoral;
-    }
-}

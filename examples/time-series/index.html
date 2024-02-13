@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Time series</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <link rel="stylesheet" href="../theme.css">
+    <link rel="stylesheet" href="./style.css">
+</head>
+<body>
+<h1>Time series example</h1>
+<main>
+    <h2>Fake server response time</h2>
+    <p>A live stream of response time. Whenever a data point is above the threshold of 450ms, we tag it as "slow" and paint it in redish color</p>
+    <ui-bar-area domain-min="0"></ui-bar-area>
+</main>
+<script src="../../src/index.js" rel="stylesheet" type="module"></script>
+<script type="module">
+    const chart = document.querySelector('ui-bar-area');
+
+    const intervalMs = 1_000;
+    const startDate = new Date();
+    const max = 500;
+    const maxBarCount = 60;
+    const possibleRanges = [10, 20, 25, 50, 100];
+    const slowThreshold = 450;
+
+    chart.addEventListener('rendered', generateLinearAxisLabels);
+
+    function* generateTimeSequence() {
+        let offset = 0;
+        while (true) {
+            const time = new Date(startDate.getTime() + offset * intervalMs);
+            const timeString = [time.getHours(), time.getMinutes(), time.getSeconds()].map(s => String(s).padStart(2, '0')).join(':');
+            yield timeString;
+            offset++;
+        }
+    }
+
+    function* generateValue() {
+        while (true) {
+            yield Math.round(Math.random() * max);
+        }
+    }
+
+    const timeSequence = generateTimeSequence();
+    const valueSequence = generateValue();
+
+    function generateDataPoint() {
+        return [timeSequence.next().value, valueSequence.next().value];
+    }
+
+    const i = setInterval(() => {
+        const [time, value] = generateDataPoint();
+        const timeEl = document.createElement('div');
+        const valueEl = document.createElement('ui-bar');
+
+        timeEl.setAttribute('slot', 'category');
+        timeEl.innerHTML = Number(time.split(':').at(-1)) % 5 === 0 ?
+        `<div class="tick big"></div><div>${time}</div>` : '<div class="tick"></div>';
+
+        valueEl.setAttribute('value', value);
+
+        if(value > slowThreshold) {
+            valueEl.classList.add('slow');
+        }
+
+        chart.append(timeEl, valueEl);
+
+        if (chart.children.length > 2 * maxBarCount) {
+            const labelToRemove = chart.querySelector('[slot=category]');
+            const barToRemove = chart.querySelector('ui-bar');
+            labelToRemove.remove();
+            barToRemove.remove();
+        }
+    }, intervalMs);
+
+    function generateLinearAxisLabels({target: chart}) {
+        const {domainMin, domainMax} = chart
+        const {range:tickRange} = possibleRanges.map((range) => {
+            return {
+                dist: Math.abs(domainMax / 5 - range),
+                range
+            }
+        }).sort((a, b) => a.dist - b.dist).at(0);
+        const tickCount = Math.ceil((domainMax - domainMin) / tickRange);
+        chart.querySelectorAll('[slot=linear-axis]').forEach(el => el.remove());
+        chart.style.setProperty('--axis-size', `${chart.project( (tickCount -1) * tickRange)}%`);
+        chart.append(...Array.from({
+            length: tickCount
+        }, createTickBuilder({tickRange})));
+    }
+    function createTickBuilder({tickRange}) {
+        return ( _, index) => {
+            const el = document.createElement('div');
+            el.setAttribute('slot', 'linear-axis')
+            el.classList.add('tick-box');
+            el.innerHTML = `<span>${index*tickRange}ms</span>`;
+            return el;
+        }
+    }
+</script>
+</body>
+</html>

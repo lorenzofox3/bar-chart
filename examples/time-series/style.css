@@ -1,0 +1,65 @@
+::part(linear-axis) {
+    font-size: 0.8em;
+    block-size: var(--axis-size);
+    align-self: flex-end;
+    grid-column: 1 / -1;
+    display: flex;
+    flex-direction: column-reverse;
+    justify-content: space-between;
+}
+
+::part(bar-area) {
+    border-left: 1px solid lightgray;
+    border-bottom: 1px solid lightgray;
+}
+
+.tick-box {
+    block-size: 1px;
+    background-image: linear-gradient(to right, transparent, lightgray, transparent);
+    background-size: 25px 1px;
+    inline-size: 100%;
+    text-align: left;
+    margin-inline-start: auto;
+
+    > span {
+        text-align: right;
+        display: inline-block;
+        width: var(--tick-width);
+    }
+
+    &:first-of-type > * {
+        display: none;
+    }
+}
+
+.tick-box:first-of-type {
+    background: none;
+}
+
+ui-bar-area {
+    --linear-axis-inline-size: 3em;
+    height: 400px;
+}
+
+[slot=category] {
+    display: grid;
+    grid-template-rows: auto auto;
+    grid-gap: 2px;
+    justify-content: center;
+    align-content: flex-start;
+
+    .tick {
+        height: 5px;
+        width: 1px;
+        background: gray;
+    }
+
+    .tick.big {
+        height: 10px;
+    }
+}
+
+.slow {
+    background: lightcoral;
+}
+

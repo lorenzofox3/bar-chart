@@ -6,11 +6,6 @@
     display: none;
 }
 
-ui-bar-area {
-    --tick-width: 2em;
-    grid-template-columns: var(--tick-width) repeat(var(--_bar-count), 1fr);
-}
-
 ::part(bar-area) {
     border-block-end: 1px solid lightgray;
 }
@@ -58,6 +53,10 @@ ui-bar-area[horizontal] {
         justify-content: space-between;
     }
 
+    & + ui-bar-area {
+        --linear-axis-inline-size: 2em
+    }
+
     & + ui-bar-area::part(bar-area) {
         border-inline-start: 1px solid lightgray;
     }
@@ -99,6 +98,4 @@ ui-bar-area[horizontal] {
     span {
         transform: translateX(30%) rotateZ(45deg);
     }
-}
-
 }

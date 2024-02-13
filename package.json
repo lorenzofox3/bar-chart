@@ -9,6 +9,9 @@
       "import": {
         "default": "./src/index.js"
       }
+    },
+    "./cdn": {
+      "default": "./bar-chart.min.js"
     }
   },
   "scripts": {

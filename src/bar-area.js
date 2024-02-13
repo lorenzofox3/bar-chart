@@ -12,10 +12,12 @@ const template = createTemplate(`
     <style>
         :host {
             --min-inline-size: 70px;
+            --linear-axis-inline-size: 0px;
             --bar-color: #426cb3;
+            --_min-col-size: calc((100% - var(--linear-axis-inline-size))/var(--_bar-count, 1));
             display: grid;
             grid-template-rows: 1fr auto;
-            grid-template-columns: auto repeat(var(--_bar-count), 1fr);
+            grid-template-columns: var(--linear-axis-inline-size) repeat(var(--_bar-count), minmax(var(--_min-col-size),1fr));
             min-block-size: 350px;
         }
 
@@ -25,7 +27,7 @@ const template = createTemplate(`
 
         #category-axis, #bar-area {
             display: grid;
-            grid-template-columns: repeat(var(--_bar-count), 1fr);
+            grid-template-columns: repeat(var(--_bar-count), minmax(var(--_min-col-size),1fr));
             grid-column: 2 / -1;
         }
 

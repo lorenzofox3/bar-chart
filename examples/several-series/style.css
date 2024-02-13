@@ -1,3 +1,14 @@
+ui-bar-group {
+    &:not([stack]) {
+        padding-inline: 10px;
+        border-inline: 1px dashed lightgray;
+    }
+
+    ui-bar:nth-child(2) {
+        background-color: lightcoral;
+    }
+}
+
 [data-serie='1'] {
     --serie-color: #3861b2;
 }
