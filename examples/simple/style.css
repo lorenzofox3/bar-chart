@@ -37,6 +37,16 @@ ui-bar-area[horizontal] .tick-box > span {
     translate: -0.5em -0.5em;
 }
 
+.controls:has(#axis-checkbox:not(:checked)) {
+    & + ui-bar-area::part(linear-axis) {
+        display: none;
+    }
+
+    & + ui-bar-area::part(bar-area) {
+        border-inline-start: unset;
+    }
+}
+
 @container ui-bar (width < 3em) or (height < 2em) {
     span {
         --_bubble-size: 75%;
