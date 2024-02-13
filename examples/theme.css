@@ -55,15 +55,33 @@ main {
 }
 
 
-ui-bar-area:not([horizontal]) {
-    .label {
-        container: label / inline-size;
-        white-space: nowrap;
+ui-bar-area {
 
-        > span {
-            transform-origin: 0 0;
-            transition: transform var(--animation-duration);
+    padding: 2em 0;
+
+    &:not([horizontal]) {
+        .label {
+            container: label / inline-size;
+            white-space: nowrap;
+
+            > span {
+                transform-origin: 0 0;
+                transition: transform var(--animation-duration);
+            }
         }
+    }
+
+    &[horizontal] {
+        ui-bar {
+            container: horizontal-bar / size;
+            span {
+                writing-mode: horizontal-tb;
+            }
+        }
+    }
+
+    &::part(category-axis) {
+        font-size: 0.75em;
     }
 }
 
@@ -91,27 +109,5 @@ ui-bar-group {
 
     ui-bar:nth-child(2) {
         background-color: lightcoral;
-    }
-}
-
-ui-bar-area {
-
-    padding: 2em;
-
-    &::part(category-axis) {
-        font-size: 0.75em;
-        text-align: center;
-        border-block-start: 1px solid #abaebb;
-    }
-
-    &[horizontal] {
-        ui-bar {
-
-            container: horizontal-bar / size;
-
-            span {
-                writing-mode: horizontal-tb;
-            }
-        }
     }
 }

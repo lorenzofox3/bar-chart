@@ -2,13 +2,13 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Bar groups chart example</title>
+    <title>Simple chart example</title>
     <meta name="viewport" content="width=device-width, initial-scale=1"/>
     <link rel="stylesheet" href="../theme.css">
     <link rel="stylesheet" href="./style.css">
 </head>
 <body>
-<h1>Bar group example</h1>
+<h1>Simple example</h1>
 <main>
     <div class="controls">
         <button>Generate data</button>
@@ -24,11 +24,11 @@
     const chart = document.querySelector('ui-bar-area');
     const checkbox = document.getElementById('horizontal-checkbox');
     const barCount = 10;
+    const tickRange = 20;
 
     document.querySelector('button').addEventListener('click', generateData);
     checkbox.addEventListener('change', toggleDirection);
-    chart.addEventListener('rendered', console.log);
-
+    chart.addEventListener('rendered', generateLinearAxisLabels);
 
     function generateData() {
         const bars = Array.from({length: barCount}, () => {
@@ -41,18 +41,39 @@
 
         const labels = Array.from({length: barCount}, (_, index) => {
             const el = document.createElement('span');
-            el.classList.add('label')
+            el.classList.add('label');
             el.innerHTML = `<span>label - ${index + 1}</span>`;
             el.setAttribute('slot', 'category');
             return el;
         });
-
         chart.replaceChildren(...bars, ...labels);
+    }
+
+
+
+    function generateLinearAxisLabels({target: chart}) {
+        const {domainMin, domainMax} = chart
+        const tickCount = Math.ceil((domainMax - domainMin) / tickRange);
+        chart.style.setProperty('--axis-size', `${chart.project( (tickCount -1) * tickRange)}%`);
+        chart.append(...Array.from({
+            length: tickCount
+        }, createTickBuilder({tickRange})));
     }
 
     function toggleDirection() {
         chart.toggleAttribute('horizontal', checkbox.checked);
     }
+
+    function createTickBuilder({tickRange}) {
+        return ( _, index) => {
+            const el = document.createElement('div');
+            el.setAttribute('slot', 'linear-axis')
+            el.classList.add('tick-box');
+            el.innerHTML = `<span>${index*tickRange}</span>`;
+            return el;
+        }
+    }
+
 
     generateData();
 </script>

@@ -11,31 +11,32 @@ import {
 const template = createTemplate(`
     <style>
         :host {
-            display: grid;
             --min-inline-size: 70px;
-            --bar-color:#426cb3;
+            --bar-color: #426cb3;
+            display: grid;
+            grid-template-rows: 1fr auto;
+            grid-template-columns: auto repeat(var(--_bar-count), 1fr);
         }
 
         :host([horizontal]) {
             writing-mode: vertical-rl;
-            --min-inline-size: 4em;
+        }
+
+        #category-axis, #bar-area {
+            display: grid;
+            grid-template-columns: repeat(var(--_bar-count), 1fr);
+            grid-column: 2 / -1;
         }
 
         #bar-area {
-            display: grid;
-            grid-template-rows: 1fr auto;
-            grid-auto-flow: column;
-            grid-auto-columns: 1fr;
             justify-items: center;
             align-items: flex-end;
+            grid-row: 1;
         }
-
-        #category-axis {
-            grid-column: 1 / span var(--_bar-count); /* needs to be set as 1 / -1 won't work on implicit grid*/
-            inline-size: 100%; /* seems required for FF in horizontal mode ?? */ 
-            grid-row: 2;
-            display: grid;
-            grid-template-columns: subgrid;
+        
+        #linear-axis {
+            grid-column: 1;
+            grid-row: 1;
         }
 
         ::slotted(ui-bar) {
@@ -51,19 +52,20 @@ const template = createTemplate(`
         }
 
     </style>
+    <div id="linear-axis" part="linear-axis">
+        <slot name="linear-axis"></slot>
+    </div>
     <div id="bar-area" part="bar-area">
         <slot name="bar-area"></slot>
-        <div id="category-axis" part="category-axis">
-            <slot name="category"></slot>
-        </div>
+    </div>
+    <div id="category-axis" part="category-axis">
+        <slot name="category"></slot>
     </div>
     </style>
 `);
 
 export class BarArea extends HTMLElement {
   #barArea;
-  #_project;
-
   static get observedAttributes() {
     return ['domain-min', 'domain-max', 'stack'];
   }
@@ -95,10 +97,6 @@ export class BarArea extends HTMLElement {
     this.render();
   }
 
-  project(value) {
-    return this.#_project(value);
-  }
-
   render() {
     const barsLike = this.#barArea.assignedElements();
     this.style.setProperty('--_bar-count', barsLike.length);
@@ -113,7 +111,10 @@ export class BarArea extends HTMLElement {
       bar.toggleAttribute('stack', this.hasAttribute('stack')),
     );
 
-    const project = (this.#_project = compose([round, createProjection(this)]));
+    const project = (this.project = compose([
+      round,
+      createProjection(this),
+    ]).bind(this));
 
     bars.forEach((bar) => {
       bar.setAttribute('size', project(bar.value));

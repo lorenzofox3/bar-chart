@@ -1,3 +1,41 @@
+::part(linear-axis){
+    font-size: 0.8em;
+    block-size: var(--axis-size);
+    align-self: flex-end;
+    display: flex;
+    flex-direction: column-reverse;
+    justify-content: space-between;
+}
+
+::part(bar-area) {
+    border-inline-start: 1px solid lightgray;
+    border-block-end: 1px solid lightgray;
+}
+
+.tick-box:not(:first-child) {
+    block-size: 1px;
+    background-image: linear-gradient(to right, transparent, gray);
+    background-repeat: no-repeat;
+    background-size: 75% 100%;
+    background-position: right;
+    inline-size: 3em;
+    text-align: right;
+    margin-inline-start: auto;
+
+    > span {
+        width: 100%;
+        display: inline-block;
+    }
+}
+
+.tick-box:first-of-type {
+    background: none;
+}
+
+ui-bar-area[horizontal] .tick-box > span {
+    rotate: -45deg;
+    translate: -0.5em -0.5em;
+}
 
 @container ui-bar (width < 3em) or (height < 2em) {
     span {
@@ -33,6 +71,6 @@
 
 @container label (max-width: 5em) {
     span {
-        transform: translateX(50%) rotateZ(45deg);
+        transform: translateX(30%) rotateZ(45deg);
     }
 }

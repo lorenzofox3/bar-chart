@@ -1,0 +1,49 @@
+[data-serie='1'] {
+    --serie-color: #3861b2;
+}
+
+[data-serie='2'] {
+    --serie-color: #d27070;
+}
+
+.serie-toggle {
+    display: grid;
+    grid-template-columns: 1em 1fr;
+    align-items: center;
+    gap: 0.25em;
+
+    [type=checkbox] {
+        --_ribbon-color: var(--serie-color);
+        appearance: none;
+        background: var(--_ribbon-color);
+        height: 1em;
+        border: 1px solid gray;
+
+        &:not(:checked) {
+            --_ribbon-color: transparent;
+        }
+    }
+}
+
+ui-bar {
+    --_background-color: var(--serie-color);
+    background: var(--_background-color);
+}
+
+.controls:has([data-serie='1']:not(:checked)) {
+    & + ui-bar-area {
+
+        ui-bar[data-serie='1'] {
+            display: none;
+        }
+    }
+}
+
+.controls:has([data-serie='2']:not(:checked)) {
+    & + ui-bar-area {
+
+        ui-bar[data-serie='2'] {
+            display: none;
+        }
+    }
+}

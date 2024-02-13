@@ -2,12 +2,13 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Simple chart example</title>
+    <title>Bar groups chart example</title>
     <meta name="viewport" content="width=device-width, initial-scale=1"/>
     <link rel="stylesheet" href="../theme.css">
+    <link rel="stylesheet" href="./style.css">
 </head>
 <body>
-<h1>Simple example</h1>
+<h1>Bar group example</h1>
 <main>
     <div class="controls">
         <button>Generate data</button>
@@ -19,8 +20,19 @@
             <label for="stack-checkbox">stack</label>
             <input type="checkbox" id="stack-checkbox">
         </div>
+        <div>
+            <label class="serie-toggle">
+                <input checked type="checkbox" data-serie="1">
+                <span>serie 1</span>
+            </label>
+            <label class="serie-toggle">
+                <input checked type="checkbox" data-serie="2">
+                <span>serie 2</span>
+            </label>
+        </div>
     </div>
-    <ui-bar-area domain-min="0"></ui-bar-area>
+    <ui-bar-area domain-min="0">
+    </ui-bar-area>
 </main>
 <script src="../../src/index.js" rel="stylesheet" type="module"></script>
 <script type="module">
@@ -37,10 +49,10 @@
     function generateData() {
         const groups = Array.from({length: groupCount}, () => {
             const el = document.createElement('ui-bar-group');
-            el.replaceChildren(...Array.from({length: 2}, () => Math.round(Math.random() * 200)).map(value => {
+            el.replaceChildren(...Array.from({length: 2}, () => Math.round(Math.random() * 200)).map((value, index) => {
                 const bar = document.createElement('ui-bar');
+                bar.setAttribute('data-serie', index + 1);
                 bar.setAttribute('value', value);
-                // bar.innerHTML = `<span>${value}</span>`;
                 return bar;
             }));
             return el;
