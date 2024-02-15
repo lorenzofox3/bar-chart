@@ -35,7 +35,7 @@
     background: none;
 }
 
-ui-bar-area[horizontal] {
+bpapa-bar-chart[horizontal] {
     .tick-box {
         background-image: linear-gradient(to bottom, transparent, lightgray, transparent);
         background-size: 1px 25px;
@@ -47,22 +47,22 @@ ui-bar-area[horizontal] {
 }
 
 .controls:has(#axis-checkbox:checked) {
-    & + ui-bar-area::part(linear-axis) {
+    & + bpapa-bar-chart::part(linear-axis) {
         display: flex;
         flex-direction: column-reverse;
         justify-content: space-between;
     }
 
-    & + ui-bar-area {
+    & + bpapa-bar-chart {
         --linear-axis-inline-size: 2em
     }
 
-    & + ui-bar-area::part(bar-area) {
+    & + bpapa-bar-chart::part(bar-area) {
         border-inline-start: 1px solid lightgray;
     }
 }
 
-@container ui-bar (width < 3em) or (height < 2em) {
+@container bpapa-bar (width < 3em) or (height < 2em) {
     span {
         --_bubble-size: 75%;
         background: inherit;
@@ -82,7 +82,7 @@ ui-bar-area[horizontal] {
     }
 }
 
-@container ui-bar (width < 1px) or (height < 1px) {
+@container bpapa-bar (width < 1px) or (height < 1px) {
     span {
         display: none;
     }

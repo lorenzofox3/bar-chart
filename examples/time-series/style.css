@@ -27,7 +27,7 @@
         width: var(--tick-width);
     }
 }
-ui-bar-area {
+bpapa-bar-chart {
     --linear-axis-inline-size: 3em;
     height: 400px;
 }

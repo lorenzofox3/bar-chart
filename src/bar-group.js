@@ -19,7 +19,7 @@ const template = createTemplate(`
       align-items: center;
 }
   
-  ::slotted(ui-bar) {
+  ::slotted(bpapa-bar) {
       block-size: var(--bar-size, 0%);
       inline-size: min(75%, 80px);
       background: var(--bar-color);

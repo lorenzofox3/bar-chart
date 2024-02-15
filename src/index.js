@@ -1,7 +1,7 @@
 import { Bar } from './bar.js';
-import { BarArea } from './bar-area.js';
+import { BarChart } from './bar-chart.js';
 import { BarGroup } from './bar-group.js';
 
-customElements.define('ui-bar', Bar);
-customElements.define('ui-bar-group', BarGroup);
-customElements.define('ui-bar-area', BarArea);
+customElements.define('bpapa-bar', Bar);
+customElements.define('bpapa-bar-group', BarGroup);
+customElements.define('bpapa-bar-chart', BarChart);

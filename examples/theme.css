@@ -55,7 +55,7 @@ main {
 }
 
 
-ui-bar-area {
+bpapa-bar-chart {
 
     padding: 2em 0;
 
@@ -72,7 +72,7 @@ ui-bar-area {
     }
 
     &[horizontal] {
-        ui-bar {
+        bpapa-bar {
             container: horizontal-bar / size;
             span {
                 writing-mode: horizontal-tb;
@@ -86,13 +86,13 @@ ui-bar-area {
 }
 
 
-ui-bar {
+bpapa-bar {
     transition: block-size var(--animation-duration);
     color: white;
     display: flex;
     justify-content: center;
     align-items: baseline;
-    container: ui-bar / size;
+    container: bpapa-bar / size;
 
     span {
         padding: 0.2em 0.5em;

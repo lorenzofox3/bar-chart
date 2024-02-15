@@ -1,10 +1,10 @@
-ui-bar-group {
+bpapa-bar-group {
     &:not([stack]) {
         padding-inline: 10px;
         border-inline: 1px dashed lightgray;
     }
 
-    ui-bar:nth-child(2) {
+    bpapa-bar:nth-child(2) {
         background-color: lightcoral;
     }
 }
@@ -36,24 +36,24 @@ ui-bar-group {
     }
 }
 
-ui-bar {
+bpapa-bar {
     --_background-color: var(--serie-color);
     background: var(--_background-color);
 }
 
 .controls:has([data-serie='1']:not(:checked)) {
-    & + ui-bar-area {
+    & + bpapa-bar-chart {
 
-        ui-bar[data-serie='1'] {
+        bpapa-bar[data-serie='1'] {
             display: none;
         }
     }
 }
 
 .controls:has([data-serie='2']:not(:checked)) {
-    & + ui-bar-area {
+    & + bpapa-bar-chart {
 
-        ui-bar[data-serie='2'] {
+        bpapa-bar[data-serie='2'] {
             display: none;
         }
     }

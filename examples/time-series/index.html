@@ -12,11 +12,11 @@
 <main>
     <h2>Fake server response time</h2>
     <p>A live stream of response time. Whenever a data point is above the threshold of 450ms, we tag it as "slow" and paint it in redish color</p>
-    <ui-bar-area domain-min="0"></ui-bar-area>
+    <bpapa-bar-chart domain-min="0"></bpapa-bar-chart>
 </main>
 <script src="../../src/index.js" rel="stylesheet" type="module"></script>
 <script type="module">
-    const chart = document.querySelector('ui-bar-area');
+    const chart = document.querySelector('bpapa-bar-chart');
 
     const intervalMs = 1_000;
     const startDate = new Date();
@@ -53,7 +53,7 @@
     const i = setInterval(() => {
         const [time, value] = generateDataPoint();
         const timeEl = document.createElement('div');
-        const valueEl = document.createElement('ui-bar');
+        const valueEl = document.createElement('bpapa-bar');
 
         timeEl.setAttribute('slot', 'category');
         timeEl.innerHTML = Number(time.split(':').at(-1)) % 5 === 0 ?
@@ -69,7 +69,7 @@
 
         if (chart.children.length > 2 * maxBarCount) {
             const labelToRemove = chart.querySelector('[slot=category]');
-            const barToRemove = chart.querySelector('ui-bar');
+            const barToRemove = chart.querySelector('bpapa-bar');
             labelToRemove.remove();
             barToRemove.remove();
         }

@@ -42,7 +42,7 @@ const template = createTemplate(`
             grid-row: 1;
         }
 
-        ::slotted(ui-bar) {
+        ::slotted(bpapa-bar) {
             block-size: var(--bar-size, 0%);
             inline-size: min(75%, var(--min-inline-size));
             background-color: var(--bar-color);
@@ -67,7 +67,7 @@ const template = createTemplate(`
     </style>
 `);
 
-export class BarArea extends HTMLElement {
+export class BarChart extends HTMLElement {
   #barArea;
   static get observedAttributes() {
     return ['domain-min', 'domain-max', 'stack'];
@@ -104,11 +104,11 @@ export class BarArea extends HTMLElement {
     const barsLike = this.#barArea.assignedElements();
     this.style.setProperty('--_bar-count', barsLike.length);
 
-    const groups = barsLike.filter(is('ui-bar-group'));
+    const groups = barsLike.filter(is('bpapa-bar-group'));
 
     const bars = barsLike
       .flatMap((barLike) => [barLike, ...Array.from(barLike.children)])
-      .filter(is('ui-bar'));
+      .filter(is('bpapa-bar'));
 
     groups.forEach((bar) =>
       bar.toggleAttribute('stack', this.hasAttribute('stack')),
