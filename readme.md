@@ -9,7 +9,7 @@ A Bar chart presents categorical data with rectangular (or not) bars whose size 
 
 ## Usage 
 
-you can install the custom elements locally on you machine using a package manager, or directly import the file from a cdn inside you HTML document. 
+you can install the custom elements locally on you machine using a package manager (the package name is **barbapapa**, or directly import the file from a cdn inside you HTML document. 
 Once the custom elements are defined, it is as simple as adding the element tags in your HTML document. 
 
 ```html
