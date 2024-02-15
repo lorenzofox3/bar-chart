@@ -86,19 +86,19 @@ https://github.com/lorenzofox3/bar-chart/assets/2402022/343fd444-3a5b-4897-9f44-
 
 ### multiple series example
 
-Basic multiple series example which let you toggle the direction, the stacking mode and the visibility of the series
+A basic multiple series example which lets you toggle the direction, the stacking mode and the visibility of the series
 
 https://github.com/lorenzofox3/bar-chart/assets/2402022/1bd291ea-39a6-494b-a3d2-e85d93707f23
 
 ### time series example
 
-It has a dynamic dataset which gets updated every second. Time series are technically not adpated to bar charts, but here you have a existing example
+It has a dynamic dataset which gets updated every second. Time series are technically not adpated to bar charts, but here you have an existing example
 
 https://github.com/lorenzofox3/bar-chart/assets/2402022/c867129b-564e-4c07-bf99-f077fc86b01f
 
 ### CSS fun
 
-It shows how far you can go with the customization. With canvas based implementation, you are limited to what the framework offer. Here you can use the whole power of css
+It shows how far you can go with the customization. With canvas based implementation, you are limited to what the framework offers. Here you can use the whole power of css
 
 https://github.com/lorenzofox3/bar-chart/assets/2402022/4e23c43f-1b97-4bdc-be81-bc23fe52e55f
 
