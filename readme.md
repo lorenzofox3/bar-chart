@@ -9,13 +9,13 @@ A Bar chart presents categorical data with rectangular (or not) bars whose size 
 
 ## Usage 
 
-you can install the custom elements locally on you machine using a package manager (the package name is **barbapapa**, or directly import the file from a cdn inside you HTML document. 
+you can install the custom elements locally on your machine using a package manager (the package name is **barbapapa**, or directly import the file from a cdn inside your HTML document. 
 Once the custom elements are defined, it is as simple as adding the element tags in your HTML document. 
 
 ```html
 <script src="https://cdn.jsdelivr.net/npm/barbapapa/bar-chart.min.js"></script>
 
-<!-- somewhere in you html-->
+<!-- somewhere in your html-->
 
 <bpapa-bar-chart domain-min="0" domain-max="100">
     <span slot="category">label 1</span>
@@ -75,7 +75,7 @@ Let you group bars together. It is useful if you want to have multiple series (s
 
 ## examples 
 
-There are a bunch of examples provided in the repository so you can see how easy it is to customize you bar chart
+There are a bunch of examples provided in the repository, so you can see how easy it is to customize you bar chart
 
 
 ### Simple example
