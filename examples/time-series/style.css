@@ -26,16 +26,7 @@
         display: inline-block;
         width: var(--tick-width);
     }
-
-    &:first-of-type > * {
-        display: none;
-    }
 }
-
-.tick-box:first-of-type {
-    background: none;
-}
-
 ui-bar-area {
     --linear-axis-inline-size: 3em;
     height: 400px;

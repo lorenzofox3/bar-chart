@@ -1,0 +1,90 @@
+body {
+    background: #2a3544;
+    color: #d8ebfc;
+    padding: 1em;
+}
+
+main {
+    padding-inline: unset;
+}
+
+ui-bar-area {
+    --linear-axis-inline-size: 2em;
+    padding: 0;
+    min-height: 500px;
+    border-radius: 10px 10px 0 0;
+    background-image: linear-gradient(to bottom, #e8f3ff, #91abc7);
+
+    &::part(linear-axis) {
+        font-size: 0.8em;
+        grid-column: 1 / -1;
+        height: 80%;
+        align-self: flex-end;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+    }
+
+    &::part(category-axis) {
+        background: #375a80;
+    }
+
+}
+
+[slot=category] {
+    color: white;
+    text-align: center;
+    padding: 0.25em 0.5em;
+    place-items: unset;
+}
+
+ui-bar {
+    width: 90%;
+    background-image: linear-gradient(to bottom, #849fb7, #2a2e34);
+    clip-path: polygon(0% 100%, 5% 72%, 9% 80%, 16% 45%, 22% 31%, 27% 41%, 33% 12%, 39% 0%, 56% 26%, 60% 19%, 71% 55%, 76% 46%, 100% 100%);
+    align-items: center;
+    flex-direction: column;
+    justify-content: space-between;
+
+    .snow {
+        height: 40%;
+        width: 100%;
+        background-image: linear-gradient(to bottom, white, rgba(255, 255, 255, 0.7));
+        clip-path: polygon(0% 0%, 0% 94%, 10% 88%, 21% 92%, 36% 86%, 53% 100%, 65% 88%, 81% 100%, 100% 79%, 100% 0%);
+    }
+
+    .location {
+        margin-bottom: 1em;
+        font-size: 0.8em;
+    }
+}
+
+
+[slot=linear-axis] {
+    --_tick-color: #94abc7;
+    --_tick-size: 1em;
+    block-size: 1px;
+    background-image: linear-gradient(to right, var(--_tick-color), var(--_tick-color) var(--_tick-size), transparent var(--_tick-size), transparent calc(var(--_tick-size) * 2));
+    background-size: calc(var(--_tick-size) * 2) 1px;
+    inline-size: 100%;
+    color: #2a3544;
+    text-align: left;
+    margin-inline-start: auto;
+
+    > * {
+        text-align: right;
+        width: var(--linear-axis-inline-size);
+        white-space: nowrap;
+        padding-inline: 0.4em;
+        translate: 0 -1.5em;
+
+        &::first-letter {
+            font-size: 1.3em;
+            letter-spacing: 1px;
+        }
+    }
+
+    &:last-of-type {
+        visibility: hidden;
+    }
+}
